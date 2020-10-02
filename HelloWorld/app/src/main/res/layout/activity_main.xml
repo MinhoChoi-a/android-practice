@@ -8,6 +8,7 @@
     android:layout_height="wrap_content"
     android:orientation="vertical"
     android:layout_gravity="center_vertical"
+    android:keepScreenOn="true"
     tools:context=".MainActivity" >
 
     <ImageView

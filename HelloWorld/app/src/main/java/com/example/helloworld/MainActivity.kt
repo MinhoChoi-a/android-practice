@@ -1,5 +1,6 @@
 package com.example.helloworld
 
+import android.media.Image
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Button
@@ -7,9 +8,14 @@ import android.widget.TextView
 import android.widget.ImageView
 import android.widget.Toast
 import java.util.*
+import kotlinx.android.synthetic.main.activity_main.*
+
 
 class MainActivity : AppCompatActivity() {
 
+    //lazy instantiation: initialize array when I first reference it in the rest of my code
+    private val imageViews by lazy {
+        arrayOf<ImageView>(result_image, result_image2) }
     //var diceImage: ImageView? = null
     private lateinit var diceImage: ImageView
     private lateinit var diceImage2: ImageView
@@ -18,16 +24,24 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
+        //setContentView((result_image))
         diceImage = findViewById(R.id.result_image)
         diceImage2 = findViewById(R.id.result_image2)
 
         val rollButton: Button = findViewById(R.id.roll_button)
         rollButton.setOnClickListener { rollDice() }
 
+        lifecycle.addObserver(MyLifeCycleObserver())
+
+        for(imageView in imageViews) {
+            imageView.setImageResource(R.drawable.dice_6)
+        }
+
         /**
         val countButton: Button = findViewById((R.id.add_button))
         countButton.setOnClickListener{ countUp() } */
     }
+
 
     private fun rollDice() {
 
