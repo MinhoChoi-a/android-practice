@@ -11,12 +11,12 @@ class MyLifeCycleObserver: LifecycleObserver {
         Log.i(LOG_TAG, "onCreate")
     }
 
-    @OnLifecycleEvent(Lifecycle.Event.ON_CREATE)
+    @OnLifecycleEvent(Lifecycle.Event.ON_START)
     fun onStartEvent() {
         Log.i(LOG_TAG, "onStart")
     }
 
-    @OnLifecycleEvent(Lifecycle.Event.ON_CREATE)
+    @OnLifecycleEvent(Lifecycle.Event.ON_RESUME)
     fun onResumeEvent() {
         Log.i(LOG_TAG, "onResume")
     }

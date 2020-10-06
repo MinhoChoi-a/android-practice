@@ -7,8 +7,10 @@ import android.widget.Button
 import android.widget.TextView
 import android.widget.ImageView
 import android.widget.Toast
+import com.google.android.material.snackbar.Snackbar
 import java.util.*
 import kotlinx.android.synthetic.main.activity_main.*
+import kotlinx.android.synthetic.main.content.*
 
 
 class MainActivity : AppCompatActivity() {
@@ -33,8 +35,16 @@ class MainActivity : AppCompatActivity() {
 
         lifecycle.addObserver(MyLifeCycleObserver())
 
-        for(imageView in imageViews) {
-            imageView.setImageResource(R.drawable.dice_6)
+        //for(imageView in imageViews) {
+        //    imageView.setImageResource(R.drawable.dice_6)
+        //}
+
+        fab.setOnClickListener {
+            Snackbar.make(it, "Replace with your own action", Snackbar.LENGTH_LONG)
+                .setAction("Action", null).show()
+
+            //Toast.makeText(this, "Replace with your own action",
+            //Toast.LENGTH_LONG).show()
         }
 
         /**
