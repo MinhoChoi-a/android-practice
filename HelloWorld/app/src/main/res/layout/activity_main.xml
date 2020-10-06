@@ -11,10 +11,11 @@
     android:keepScreenOn="true"
     tools:context=".MainActivity" >
 
-    <include layout="@layout/content"
+    <include
+        layout="@layout/content"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_gravity="center_horizontal"/>
+        android:layout_gravity="center_horizontal" />
 
     <Button
         android:id="@+id/roll_button"
