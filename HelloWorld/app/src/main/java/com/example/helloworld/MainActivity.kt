@@ -7,6 +7,7 @@ import android.widget.Button
 import android.widget.TextView
 import android.widget.ImageView
 import android.widget.Toast
+import com.example.helloworld.util.DiceHelper
 import com.google.android.material.snackbar.Snackbar
 import java.util.*
 import kotlinx.android.synthetic.main.activity_main.*
@@ -15,23 +16,39 @@ import kotlinx.android.synthetic.main.content.*
 
 class MainActivity : AppCompatActivity() {
 
+    private lateinit var dice: IntArray
+    private lateinit var headlineText: String
+
     //lazy instantiation: initialize array when I first reference it in the rest of my code
     private val imageViews by lazy {
-        arrayOf<ImageView>(result_image, result_image2) }
+        arrayOf<ImageView>(result_image, result_image2, result_image3, result_image4, result_image5) }
     //var diceImage: ImageView? = null
-    private lateinit var diceImage: ImageView
-    private lateinit var diceImage2: ImageView
+    //private lateinit var diceImage: ImageView
+    //private lateinit var diceImage2: ImageView
+
+    private val headline by lazy {
+        findViewById<TextView>(R.id.headline)
+    }
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
+        headlineText = savedInstanceState?.getString(HEADLINE_TEXT)
+            ?: getString(R.string.welcome)
+        dice = savedInstanceState?.getIntArray(DICE_COLLECTION)
+            ?: intArrayOf(1,2,3,4,5)
+
         //setContentView((result_image))
-        diceImage = findViewById(R.id.result_image)
-        diceImage2 = findViewById(R.id.result_image2)
+        //diceImage = findViewById(R.id.result_image)
+        //diceImage2 = findViewById(R.id.result_image2)
 
         val rollButton: Button = findViewById(R.id.roll_button)
-        rollButton.setOnClickListener { rollDice() }
+
+        rollButton.setOnClickListener { clickHandler() }
+        //headline.text = getString(R.string.welcome)
+        updateDisplay()
 
         lifecycle.addObserver(MyLifeCycleObserver())
 
@@ -52,6 +69,33 @@ class MainActivity : AppCompatActivity() {
         countButton.setOnClickListener{ countUp() } */
     }
 
+    private fun clickHandler() {
+        dice = DiceHelper.rollDice()
+        headlineText = DiceHelper.evaluateDice(this, dice)
+        updateDisplay()
+    }
+
+    private fun updateDisplay() {
+        for (i in 0 until imageViews.size) {
+            val drawableId = when (dice[i]) {
+                1 -> R.drawable.dice_1
+                2 -> R.drawable.dice_2
+                3 -> R.drawable.dice_3
+                4 -> R.drawable.dice_4
+                5 -> R.drawable.dice_5
+                6 -> R.drawable.dice_6
+                else -> R.drawable.dice_6
+            }
+            imageViews[i].setImageResource(drawableId)
+        }
+        headline.text = headlineText
+    }
+
+    override fun onSaveInstanceState(outState: Bundle) {
+        outState?.putString(HEADLINE_TEXT, headlineText)
+        outState?.putIntArray(DICE_COLLECTION, dice)
+        super.onSaveInstanceState(outState)
+    }
 
     private fun rollDice() {
 
@@ -76,8 +120,8 @@ class MainActivity : AppCompatActivity() {
             else -> R.drawable.dice_6
         }
 
-        diceImage.setImageResource(drawableResource)
-        diceImage2.setImageResource(drawableResource2)
+        //diceImage.setImageResource(drawableResource)
+        //diceImage2.setImageResource(drawableResource2)
 
         //   Toast.makeText(this, "button clicked",
         //      Toast.LENGTH_SHORT).show()

@@ -21,4 +21,19 @@ class MyLifeCycleObserver: LifecycleObserver {
         Log.i(LOG_TAG, "onResume")
     }
 
+    @OnLifecycleEvent(Lifecycle.Event.ON_DESTROY)
+    fun onDestroyEvent() {
+        Log.i(LOG_TAG, "onDestroy")
+    }
+
+    @OnLifecycleEvent(Lifecycle.Event.ON_PAUSE)
+    fun onPauseEvent() {
+        Log.i(LOG_TAG, "onPause")
+    }
+
+    @OnLifecycleEvent(Lifecycle.Event.ON_STOP)
+    fun onStopEvent() {
+        Log.i(LOG_TAG, "onStop")
+    }
+
 }

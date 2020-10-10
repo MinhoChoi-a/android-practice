@@ -3,4 +3,13 @@
     <string name="roll_label">Roll</string>
     <string name="add_label">Count Up</string>
     <string name="roll_em">Roll The Dices</string>
+    <string name="five_of_a_kind">five</string>
+    <string name="four_of_a_kind">four</string>
+    <string name="full_house">full house</string>
+    <string name="straight">straight</string>
+    <string name="three_of_a_kind">three</string>
+    <string name="two_pairs">two pairs</string>
+    <string name="pair">one pair</string>
+    <string name="nothing_special">nothing</string>
+    <string name="welcome">welcome</string>
 </resources>
