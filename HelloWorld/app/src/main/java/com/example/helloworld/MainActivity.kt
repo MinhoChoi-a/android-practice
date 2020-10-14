@@ -7,7 +7,9 @@ import android.widget.Button
 import android.widget.TextView
 import android.widget.ImageView
 import android.widget.Toast
+import androidx.lifecycle.ViewModelProviders
 import com.example.helloworld.util.DiceHelper
+import com.example.helloworld.viewModel.DiceViewModel
 import com.google.android.material.snackbar.Snackbar
 import java.util.*
 import kotlinx.android.synthetic.main.activity_main.*
@@ -16,8 +18,10 @@ import kotlinx.android.synthetic.main.content.*
 
 class MainActivity : AppCompatActivity() {
 
-    private lateinit var dice: IntArray
-    private lateinit var headlineText: String
+    private lateinit var viewModel: DiceViewModel
+
+    //private lateinit var dice: IntArray
+    //private lateinit var headlineText: String
 
     //lazy instantiation: initialize array when I first reference it in the rest of my code
     private val imageViews by lazy {
@@ -35,10 +39,23 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
+        viewModel = ViewModelProviders.of(this)
+            .get(DiceViewModel::class.java)
+
+        viewModel.headline.observe(this, androidx.lifecycle.Observer {
+            headline.text = it
+        })
+
+        viewModel.dice.observe(this, androidx.lifecycle.Observer {
+            updateDisplay(it)
+        })
+
+        /**
         headlineText = savedInstanceState?.getString(HEADLINE_TEXT)
             ?: getString(R.string.welcome)
         dice = savedInstanceState?.getIntArray(DICE_COLLECTION)
             ?: intArrayOf(1,2,3,4,5)
+        */
 
         //setContentView((result_image))
         //diceImage = findViewById(R.id.result_image)
@@ -46,9 +63,9 @@ class MainActivity : AppCompatActivity() {
 
         val rollButton: Button = findViewById(R.id.roll_button)
 
-        rollButton.setOnClickListener { clickHandler() }
+        rollButton.setOnClickListener { viewModel.rollDice() }
         //headline.text = getString(R.string.welcome)
-        updateDisplay()
+        //updateDisplay()
 
         lifecycle.addObserver(MyLifeCycleObserver())
 
@@ -69,13 +86,15 @@ class MainActivity : AppCompatActivity() {
         countButton.setOnClickListener{ countUp() } */
     }
 
+    /**
     private fun clickHandler() {
         dice = DiceHelper.rollDice()
         headlineText = DiceHelper.evaluateDice(this, dice)
         updateDisplay()
     }
+    */
 
-    private fun updateDisplay() {
+    private fun updateDisplay(dice: IntArray) {
         for (i in 0 until imageViews.size) {
             val drawableId = when (dice[i]) {
                 1 -> R.drawable.dice_1
@@ -88,14 +107,17 @@ class MainActivity : AppCompatActivity() {
             }
             imageViews[i].setImageResource(drawableId)
         }
-        headline.text = headlineText
+        //headline.text = headlineText
     }
 
+    /**
+    no longer need it since we have a viewModel
     override fun onSaveInstanceState(outState: Bundle) {
         outState?.putString(HEADLINE_TEXT, headlineText)
         outState?.putIntArray(DICE_COLLECTION, dice)
         super.onSaveInstanceState(outState)
     }
+    */
 
     private fun rollDice() {
 
