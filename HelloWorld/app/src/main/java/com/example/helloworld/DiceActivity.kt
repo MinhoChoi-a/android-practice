@@ -3,6 +3,7 @@ package com.example.helloworld
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.PersistableBundle
+import android.view.Menu
 import android.widget.Button
 import android.widget.TextView
 import android.widget.ImageView
@@ -117,9 +118,14 @@ class DiceActivity : AppCompatActivity() {
     }
 
     //another way to use onSaveInstanceState, but don't need it the viewModel
-    override fun onSaveInstanceState(outState: Bundle) {
-        outState?.putBoolean(CONFIG_CHANGE, true)
-        super.onSaveInstanceState(outState)
+    //override fun onSaveInstanceState(outState: Bundle) {
+      //  outState?.putBoolean(CONFIG_CHANGE, true)
+        //super.onSaveInstanceState(outState)
+    //}
+
+    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+        menuInflater.inflate(R.menu.menu_idce, menu)
+        return super.onCreateOptionsMenu(menu)
     }
 
     private fun rollDice() {
