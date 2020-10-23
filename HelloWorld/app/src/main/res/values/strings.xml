@@ -22,5 +22,7 @@ If possible, include visual cues, screenshots, photographs, or diagrams. This ma
 Summarize the above in 3 sentences and practice speaking about it. Avoid jargon to ensure non-experts understand what the project was about.
 The last point is critical: given the many candidates recruiters and hiring managers speak with, being able to summarize the end result without any jargon will help those hiring for the role remember it, speak to their colleagues about it, and ultimately evangelize you as a candidate. If you have a visual component to the portfolio, then that makes it shareable, too!
  </string>
+    <string name="settings">Settings</string>
+    <string name="about">About</string>
 
 </resources>

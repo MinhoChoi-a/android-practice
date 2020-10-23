@@ -1,16 +1,20 @@
 package com.example.helloworld
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.PersistableBundle
 import android.view.Menu
+import android.view.MenuItem
 import android.widget.Button
 import android.widget.TextView
 import android.widget.ImageView
 import androidx.lifecycle.ViewModelProviders
 import com.example.helloworld.viewModel.DiceViewModel
 import com.google.android.material.snackbar.Snackbar
+
 import kotlinx.android.synthetic.main.activity_dice.*
+
 import kotlinx.android.synthetic.main.content_dice.*
 
 
@@ -36,6 +40,10 @@ class DiceActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_dice)
+        setSupportActionBar(toolbar)
+
+        supportActionBar?.setDisplayHomeAsUpEnabled(true)
+        supportActionBar?.setHomeAsUpIndicator(R.drawable.ic_settings)
 
         viewModel = ViewModelProviders.of(this)
             .get(DiceViewModel::class.java)
@@ -53,7 +61,6 @@ class DiceActivity : AppCompatActivity() {
         val configChange = savedInstanceState?.getBoolean(CONFIG_CHANGE)
             ?: false
         if(configChange.not()) viewModel.rollDice()
-
 
         /**
         headlineText = savedInstanceState?.getString(HEADLINE_TEXT)
@@ -80,6 +87,7 @@ class DiceActivity : AppCompatActivity() {
         //    imageView.setImageResource(R.drawable.dice_6)
         //}
 
+        /**
         fab.setOnClickListener {
             Snackbar.make(it, "Replace with your own action", Snackbar.LENGTH_LONG)
                 .setAction("Action", null).show()
@@ -87,7 +95,7 @@ class DiceActivity : AppCompatActivity() {
             //Toast.makeText(this, "Replace with your own action",
             //Toast.LENGTH_LONG).show()
         }
-
+        */
         /**
         val countButton: Button = findViewById((R.id.add_button))
         countButton.setOnClickListener{ countUp() } */
@@ -127,6 +135,26 @@ class DiceActivity : AppCompatActivity() {
         menuInflater.inflate(R.menu.menu_idce, menu)
         return super.onCreateOptionsMenu(menu)
     }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        return when (item?.itemId) {
+            R.id.action_share -> shareResult()
+            else -> super.onOptionsItemSelected(item)
+        }
+    }
+
+    private fun shareResult(): Boolean {
+
+        val intent = Intent().apply {
+            action = Intent.ACTION_SEND
+            putExtra(Intent.EXTRA_TEXT,
+                "I rolled the dice: ${viewModel.headline.value}")
+            type = "text/plain"
+        }
+        startActivity(intent)
+        return true
+    }
+
 
     private fun rollDice() {
 
