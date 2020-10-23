@@ -24,5 +24,7 @@ The last point is critical: given the many candidates recruiters and hiring mana
  </string>
     <string name="settings">Settings</string>
     <string name="about">About</string>
+    <string name="open_nav">open nav</string>
+    <string name="close_nav">close nav</string>
 
 </resources>

@@ -6,6 +6,7 @@ import kotlinx.android.synthetic.main.activity_main.*
 import android.content.Intent
 import android.view.Menu
 import android.view.MenuItem
+import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.appcompat.widget.Toolbar
 import androidx.core.view.GravityCompat
 import androidx.drawerlayout.widget.DrawerLayout
@@ -33,6 +34,14 @@ class MainActivity : AppCompatActivity(),
 
 
         navView.setNavigationItemSelectedListener(this)
+
+        val toggle = ActionBarDrawerToggle(
+            this, drawerLayout, toolbar,
+            R.string.open_nav, R.string.close_nav
+        )
+
+        drawerLayout.addDrawerListener(toggle)
+        toggle.syncState()
 
     }
 
