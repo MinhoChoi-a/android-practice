@@ -13,4 +13,14 @@
     <string name="nothing_special">nothing</string>
     <string name="welcome">welcome</string>
     <string name="share">Share</string>
+    <string name="text">Here are some specific pieces of advice:
+
+Pick one project to emphasize; one you either ran or where you made a very clear contribution.
+Emphasize your role and what innovation, data research, or piece of work you completed there.
+Link to the end result, whether it was a research paper, conference talk, product launch, or something else.
+If possible, include visual cues, screenshots, photographs, or diagrams. This makes the portfolio engaging and more interesting.
+Summarize the above in 3 sentences and practice speaking about it. Avoid jargon to ensure non-experts understand what the project was about.
+The last point is critical: given the many candidates recruiters and hiring managers speak with, being able to summarize the end result without any jargon will help those hiring for the role remember it, speak to their colleagues about it, and ultimately evangelize you as a candidate. If you have a visual component to the portfolio, then that makes it shareable, too!
+ </string>
+
 </resources>
