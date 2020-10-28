@@ -11,8 +11,8 @@
         android:theme="@style/Theme.JetPackTrial">
         <activity
             android:name=".MainActivity"
-            android:label="Note "
-            android:theme="@style/Theme.JetPackTrial.NoActionBar">
+            android:label="Note"
+            android:theme="@style/Theme.JetPackTrial">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
