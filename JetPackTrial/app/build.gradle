@@ -33,6 +33,14 @@ android {
     kotlinOptions {
         jvmTarget = '1.8'
     }
+
+    //generates a class representing bindings for all the views in an XML layout file
+    //result in creating one class for each layout
+    //class will have properties matching each of the child views
+    buildFeatures {
+        viewBinding = true
+    }
+
 }
 
 dependencies {
@@ -46,6 +54,8 @@ dependencies {
     //navigation dependency
     implementation 'androidx.navigation:navigation-fragment-ktx:2.2.2'
     implementation 'androidx.navigation:navigation-ui-ktx:2.2.2'
+    implementation 'androidx.recyclerview:recyclerview:1.1.0'
+
     implementation 'androidx.legacy:legacy-support-v4:1.0.0'
     implementation 'androidx.lifecycle:lifecycle-livedata-ktx:2.2.0'
     implementation 'androidx.lifecycle:lifecycle-viewmodel-ktx:2.2.0'
