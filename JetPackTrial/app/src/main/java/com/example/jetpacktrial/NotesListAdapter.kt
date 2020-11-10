@@ -7,7 +7,10 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.jetpacktrial.data.NoteEntity
 import com.example.jetpacktrial.databinding.ListItemBinding
 
-class NotesListAdapter(private val notesList: List<NoteEntity>):
+//handling the click event
+class NotesListAdapter(private val notesList: List<NoteEntity>,
+                        private val listener: ListItemListener
+                       ):
     RecyclerView.Adapter<NotesListAdapter.ViewHolder>(){
     //extend the class itself from a class names recyclerview.adapter
 
@@ -37,13 +40,19 @@ class NotesListAdapter(private val notesList: List<NoteEntity>):
         //with block
         //holder: references the instnace of the ViewHolder for the current row and binidng is it's public property
         with(holder.binding) {
-        noteText.text = note.text
+            noteText.text = note.text
+            root.setOnClickListener {
+                listener.onItemClick(note.id)
+            }
+
         }
 
     }
 
     override fun getItemCount() = notesList.size
 
-
+    interface ListItemListener {
+        fun onItemClick(notedId: Int)
+    }
 
 }

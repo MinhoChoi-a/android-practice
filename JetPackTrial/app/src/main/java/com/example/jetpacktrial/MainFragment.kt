@@ -12,8 +12,10 @@ import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.jetpacktrial.databinding.MainFragmentBinding
 
-class MainFragment : Fragment() {
+class MainFragment : Fragment(),
+    NotesListAdapter.ListItemListener
 
+    {
     /**
      * When using navigation component the new instance function will not be called
     companion object {
@@ -48,7 +50,7 @@ class MainFragment : Fragment() {
 
             Log.i("noteLogging", it.toString())
 
-            adapter = NotesListAdapter(it)
+            adapter = NotesListAdapter(it, this@MainFragment)
 
             binding.recyclerView.adapter = adapter
 
@@ -65,7 +67,11 @@ class MainFragment : Fragment() {
         //return inflater.inflate(R.layout.main_fragment, container, false)
     }
 
-    /** won't need anymore
+        override fun onItemClick(notedId: Int) {
+            Log.i(TAG, "onItemClick: received note id $notedId")
+        }
+
+        /** won't need anymore
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
         //viewModel = ViewModelProvider(this).get(MainViewModel::class.java)
