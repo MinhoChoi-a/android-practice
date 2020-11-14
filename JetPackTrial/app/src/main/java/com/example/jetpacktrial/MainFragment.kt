@@ -5,9 +5,11 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.jetpacktrial.databinding.MainFragmentBinding
@@ -30,6 +32,9 @@ class MainFragment : Fragment(),
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
+
+        (activity as AppCompatActivity)
+            .supportActionBar?.setDisplayHomeAsUpEnabled(false)
 
         //have references to all the child view objects within the layout
         binding = MainFragmentBinding.inflate(inflater, container, false)
@@ -69,6 +74,8 @@ class MainFragment : Fragment(),
 
         override fun onItemClick(notedId: Int) {
             Log.i(TAG, "onItemClick: received note id $notedId")
+            val action = MainFragmentDirections.actionEditNote((notedId))
+            findNavController().navigate(action)
         }
 
         /** won't need anymore
