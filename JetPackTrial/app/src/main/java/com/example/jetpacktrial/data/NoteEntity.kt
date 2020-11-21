@@ -11,7 +11,7 @@ import java.util.*
 
 @Entity(tableName = "notes")
 data class NoteEntity(
-    //SQLLite will generate unique numeric value
+    //SQLite will generate unique numeric value
     @PrimaryKey(autoGenerate = true)
     var id:Int,
     var date: Date,
