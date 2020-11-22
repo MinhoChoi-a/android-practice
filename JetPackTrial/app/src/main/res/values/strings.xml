@@ -12,4 +12,5 @@
     <string name="todo">TODO</string>
     <string name="hello">Hello</string>
     <string name="enter_note">Enter note</string>
+    <string name="add_sample_data">Add sample data</string>
 </resources>

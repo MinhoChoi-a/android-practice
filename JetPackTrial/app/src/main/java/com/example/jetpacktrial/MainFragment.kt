@@ -2,9 +2,7 @@ package com.example.jetpacktrial
 
 import android.os.Bundle
 import android.util.Log
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
+import android.view.*
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
@@ -36,6 +34,8 @@ class MainFragment : Fragment(),
         (activity as AppCompatActivity)
             .supportActionBar?.setDisplayHomeAsUpEnabled(false)
 
+        setHasOptionsMenu(true)
+
         //have references to all the child view objects within the layout
         binding = MainFragmentBinding.inflate(inflater, container, false)
         viewModel = ViewModelProvider(this).get(MainViewModel::class.java)
@@ -51,7 +51,8 @@ class MainFragment : Fragment(),
             addItemDecoration(divider)
         }
 
-        viewModel.noteList.observe(viewLifecycleOwner, Observer {
+        //need ? or !! to manage nullable data
+        viewModel.noteList?.observe(viewLifecycleOwner, Observer {
 
             Log.i("noteLogging", it.toString())
 
@@ -71,6 +72,24 @@ class MainFragment : Fragment(),
         return binding.root
         //return inflater.inflate(R.layout.main_fragment, container, false)
     }
+
+        override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
+
+            inflater.inflate(R.menu.menu_main, menu)
+            super.onCreateOptionsMenu(menu, inflater)
+        }
+
+        override fun onOptionsItemSelected(item: MenuItem): Boolean {
+            return when (item.itemId) {
+                R.id.action_sample_data -> addSampleData()
+                else -> return super.onOptionsItemSelected(item)
+            }
+        }
+
+        private fun addSampleData(): Boolean {
+            viewModel.addSampleData()
+            return true
+        }
 
         override fun onItemClick(notedId: Int) {
             Log.i(TAG, "onItemClick: received note id $notedId")
