@@ -1,6 +1,8 @@
 package com.example.jetpacktrial
 
 import android.os.Bundle
+import android.os.Handler
+import android.os.Looper
 import android.util.Log
 import android.view.*
 import androidx.appcompat.app.AppCompatActivity
@@ -93,8 +95,34 @@ class MainFragment : Fragment(),
         override fun onOptionsItemSelected(item: MenuItem): Boolean {
             return when (item.itemId) {
                 R.id.action_sample_data -> addSampleData()
+                R.id.action_delete_all -> deleteDataAll()
+                R.id.action_delete -> deleteSelectedNotes()
                 else -> return super.onOptionsItemSelected(item)
             }
+        }
+
+        private fun deleteDataAll(): Boolean {
+            viewModel.delteAll()
+            Handler(Looper.getMainLooper()).postDelayed({
+                adapter.selectedNotes.clear()
+                requireActivity().invalidateOptionsMenu()
+            }, 100)
+            //database operation is running in a background thread and is asynchronous
+            //need to wait a moment before taking this action
+
+            return true
+        }
+
+        private fun deleteSelectedNotes(): Boolean {
+            viewModel.deleteNotes(adapter.selectedNotes)
+            Handler(Looper.getMainLooper()).postDelayed({
+                adapter.selectedNotes.clear()
+                requireActivity().invalidateOptionsMenu()
+            }, 100)
+            //database operation is running in a background thread and is asynchronous
+            //need to wait a moment before taking this action
+
+            return true
         }
 
         private fun addSampleData(): Boolean {

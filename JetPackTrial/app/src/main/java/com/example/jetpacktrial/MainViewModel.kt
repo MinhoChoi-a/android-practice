@@ -37,7 +37,22 @@ class MainViewModel(app: Application) : AndroidViewModel(app) {
         }
     }
 
+    fun deleteNotes(selectedNotes: ArrayList<NoteEntity>) {
+        //need to be working in a background thread
+        viewModelScope.launch {
+            withContext(Dispatchers.IO) {
+                database?.noteDao()?.deleteNotes(selectedNotes)
+            }
+        }
+    }
 
+    fun delteAll() {
+        viewModelScope.launch {
+            withContext(Dispatchers.IO) {
+                database?.noteDao()?.deleteAll()
+            }
+        }
+    }
     //-> don't need init
     //executed as the classes initialized
     //init {

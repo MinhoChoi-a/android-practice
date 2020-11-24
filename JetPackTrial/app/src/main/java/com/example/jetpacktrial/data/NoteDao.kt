@@ -1,10 +1,7 @@
 package com.example.jetpacktrial.data
 
 import androidx.lifecycle.LiveData
-import androidx.room.Dao
-import androidx.room.Insert
-import androidx.room.OnConflictStrategy
-import androidx.room.Query
+import androidx.room.*
 
 //Data access object
 @Dao
@@ -26,4 +23,10 @@ interface NoteDao {
 
     @Query("SELECT COUNT(*) from notes")
     fun getCount(): Int
+
+    @Delete
+    fun deleteNotes(selectedNotes: ArrayList<NoteEntity>):Int
+
+    @Query("DELETE FROM notes")
+    fun deleteAll()
 }
