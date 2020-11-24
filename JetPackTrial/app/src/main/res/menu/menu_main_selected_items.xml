@@ -3,7 +3,10 @@
     xmlns:tools="http://schemas.android.com/tools"
     tools:context="com.example.jetpacktrial.MainActivity">
     <item
-        android:id="@+id/action_sample_data"
-        android:title="@string/add_sample_data"
-        />
+        android:id="@+id/action_delete"
+    android:title="@string/delete"
+        android:icon="@drawable/ic_delete"
+        app:showAsAction="ifRoom"/>
+    <!--if there is space on the toolbar, showing its icon instead in an options menu-->
+
 </menu>

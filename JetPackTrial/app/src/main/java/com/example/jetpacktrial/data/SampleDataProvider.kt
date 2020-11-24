@@ -19,9 +19,22 @@ class SampleDataProvider {
         }
 
         fun getNotes() = arrayListOf(
-                NoteEntity(1, getDate(0), sampleText1),
-                NoteEntity(2, getDate(1), sampleText2),
-                NoteEntity(3, getDate(2), sampleText3),
+                NoteEntity(getDate(0), sampleText1),
+                NoteEntity(getDate(1), sampleText2),
+                NoteEntity(getDate(2), sampleText3),
+                NoteEntity(getDate(3), sampleText1),
+                NoteEntity(getDate(4), sampleText2),
+                NoteEntity(getDate(5), sampleText3),
+                NoteEntity(getDate(6), sampleText1),
+                NoteEntity(getDate(4), sampleText2),
+                NoteEntity(getDate(5), sampleText3),
+                NoteEntity(getDate(6), sampleText1),
+                NoteEntity(getDate(4), sampleText2),
+                NoteEntity(getDate(5), sampleText3),
+                NoteEntity(getDate(6), sampleText1),
+                NoteEntity(getDate(4), sampleText2),
+                NoteEntity(getDate(5), sampleText3),
+                NoteEntity(getDate(6), sampleText1)
         )
     }
 

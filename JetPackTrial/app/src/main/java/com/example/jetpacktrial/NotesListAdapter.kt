@@ -10,10 +10,11 @@ import com.example.jetpacktrial.databinding.ListItemBinding
 //handling the click event
 class NotesListAdapter(private val notesList: List<NoteEntity>,
                         private val listener: ListItemListener
-                       ):
-    RecyclerView.Adapter<NotesListAdapter.ViewHolder>(){
+                       ): RecyclerView.Adapter<NotesListAdapter.ViewHolder>(){
     //extend the class itself from a class names recyclerview.adapter
 
+
+    val selectedNotes = arrayListOf<NoteEntity>()
 
     //inner class gives the ability to reference the private value of its parent
     //reference itemView, type is view from the android.view package
@@ -45,14 +46,37 @@ class NotesListAdapter(private val notesList: List<NoteEntity>,
                 listener.onItemClick(note.id)
             }
 
-        }
+            floatingActionButton.setOnClickListener {
+                if(selectedNotes.contains(note)) {
+                    selectedNotes.remove(note)
+                    floatingActionButton.setImageResource(R.drawable.ic_note)
+                }
+                else {
+                    selectedNotes.add(note)
+                    floatingActionButton.setImageResource(R.drawable.ic_check)
+                }
 
-    }
+                listener.onItemSelectionChanged()
+            }
+        //need to set this icon at runtime, either with this fragment first pops up, or as lists scroll
+            floatingActionButton.setImageResource(
+                if(selectedNotes.contains(note)) {
+                    R.drawable.ic_check
+                }
+                else {
+                    R.drawable.ic_note
+                })
+            }
+        }
 
     override fun getItemCount() = notesList.size
 
     interface ListItemListener {
         fun onItemClick(notedId: Int)
+        fun onItemSelectionChanged()
     }
 
-}
+    }
+
+
+

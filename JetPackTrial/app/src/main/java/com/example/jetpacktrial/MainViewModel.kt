@@ -31,6 +31,7 @@ class MainViewModel(app: Application) : AndroidViewModel(app) {
         viewModelScope.launch {
             withContext(Dispatchers.IO) {
                 val sampleNotes = SampleDataProvider.getNotes()
+
                 database?.noteDao()?.insertAll(sampleNotes)
             }
         }

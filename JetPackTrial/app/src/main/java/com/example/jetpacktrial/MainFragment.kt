@@ -74,8 +74,19 @@ class MainFragment : Fragment(),
     }
 
         override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
+            val menuId =
+                    //cannot do null check cause it is lateinit variable
+                    if(this::adapter.isInitialized
+                            && adapter.selectedNotes.isNotEmpty()) {
+                    R.menu.menu_main_selected_items
+                    }
+                    else
+                    {
+                        R.menu.menu_main
+                    }
 
-            inflater.inflate(R.menu.menu_main, menu)
+
+            inflater.inflate(menuId, menu)
             super.onCreateOptionsMenu(menu, inflater)
         }
 
@@ -95,6 +106,10 @@ class MainFragment : Fragment(),
             Log.i(TAG, "onItemClick: received note id $notedId")
             val action = MainFragmentDirections.actionEditNote((notedId))
             findNavController().navigate(action)
+        }
+
+        override fun onItemSelectionChanged() {
+            requireActivity().invalidateOptionsMenu()
         }
 
         /** won't need anymore
