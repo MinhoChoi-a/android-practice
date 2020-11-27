@@ -64,7 +64,10 @@ class EditorFragment : Fragment() {
 
         //this lambda expression will be triggered when data changes
         viewModel.currentNote.observe(viewLifecycleOwner, Observer {
-            binding.editor.setText(it.text)
+            val savedString = savedInstanceState?.getString(NOTE_TEXT_KEY)
+            val cursorPosition = savedInstanceState?.getInt(CURSOR_POSITION_KEY) ?: 0
+            binding.editor.setText(savedString ?:it.text)
+            binding.editor.setSelection(cursorPosition)
         })
         viewModel.getNoteById(args.noteid)
         //args value is an instance of the editor fragment args class
@@ -102,4 +105,13 @@ class EditorFragment : Fragment() {
         //viewModel = ViewModelProvider(this).get(EditorViewModel::class.java)
     }
 
+    //this function is called, as a configuration change begins
+    override fun onSaveInstanceState(outState: Bundle) {
+        //with statement: getting current information for the editor object within binding
+        with(binding.editor) {
+            outState.putString(NOTE_TEXT_KEY, text.toString())
+            outState.putInt(CURSOR_POSITION_KEY, selectionStart)
+        }
+        super.onSaveInstanceState(outState)
+    }
 }
