@@ -43,7 +43,7 @@ class NotesListAdapter(private val notesList: List<NoteEntity>,
         with(holder.binding) {
             noteText.text = note.text
             root.setOnClickListener {
-                listener.onItemClick(note.id)
+                listener.editNote(note.id)
             }
 
             floatingActionButton.setOnClickListener {
@@ -72,7 +72,7 @@ class NotesListAdapter(private val notesList: List<NoteEntity>,
     override fun getItemCount() = notesList.size
 
     interface ListItemListener {
-        fun onItemClick(notedId: Int)
+        fun editNote(notedId: Int) //shift + f6: to change every connected name
         fun onItemSelectionChanged()
     }
 

@@ -38,6 +38,8 @@ class MainFragment : Fragment(),
 
         setHasOptionsMenu(true)
 
+        requireActivity().title = getString(R.string.app_name)
+
         //have references to all the child view objects within the layout
         binding = MainFragmentBinding.inflate(inflater, container, false)
         viewModel = ViewModelProvider(this).get(MainViewModel::class.java)
@@ -70,6 +72,10 @@ class MainFragment : Fragment(),
             //recylcer view to display itself as a list
 
         })
+
+        binding.floatingActionButton2.setOnClickListener {
+            editNote(NEW_NOTE_ID)
+        }
 
         return binding.root
         //return inflater.inflate(R.layout.main_fragment, container, false)
@@ -130,9 +136,9 @@ class MainFragment : Fragment(),
             return true
         }
 
-        override fun onItemClick(notedId: Int) {
+        override fun editNote(notedId: Int) {
             Log.i(TAG, "onItemClick: received note id $notedId")
-            val action = MainFragmentDirections.actionEditNote((notedId))
+            val action = MainFragmentDirections.actionEditNote((notedId)) //comming from navigation graph xml file
             findNavController().navigate(action)
         }
 

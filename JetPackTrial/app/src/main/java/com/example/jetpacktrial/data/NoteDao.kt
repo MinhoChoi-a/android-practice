@@ -29,4 +29,7 @@ interface NoteDao {
 
     @Query("DELETE FROM notes")
     fun deleteAll()
+
+    @Delete
+    fun deleteNote(note: NoteEntity)
 }
