@@ -3,6 +3,11 @@ plugins {
     id 'kotlin-android'
     id 'kotlin-kapt'
     id "androidx.navigation.safeargs.kotlin"
+    id "kotlin-android-extensions"
+    //to save arraylist of object, have to implement parcelable interface
+    //in java, it is complicate
+    //but kotlin, just need an annotation and a return type
+    //to use annotation, need to add a declaration
 }
 
 android {

@@ -12,6 +12,7 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.example.jetpacktrial.data.NoteEntity
 import com.example.jetpacktrial.databinding.MainFragmentBinding
 
 class MainFragment : Fragment(),
@@ -70,6 +71,10 @@ class MainFragment : Fragment(),
             //it is passed into an instance of the adpater
             //the adapter is passed to the recycler view
             //recylcer view to display itself as a list
+
+            val selectedNotes =savedInstanceState?.getParcelableArrayList<NoteEntity>(SELECTED_NOTES_KEY)
+
+            adapter.selectedNotes.addAll(selectedNotes ?: emptyList())
 
         })
 
@@ -146,11 +151,12 @@ class MainFragment : Fragment(),
             requireActivity().invalidateOptionsMenu()
         }
 
-        /** won't need anymore
-    override fun onActivityCreated(savedInstanceState: Bundle?) {
-        super.onActivityCreated(savedInstanceState)
-        //viewModel = ViewModelProvider(this).get(MainViewModel::class.java)
-        // TODO: Use the ViewModel
-    } */
+        override fun onSaveInstanceState(outState: Bundle) {
+            if(this::adapter.isInitialized) {
+                outState.putParcelableArrayList(SELECTED_NOTES_KEY, adapter.selectedNotes)
+            }
+
+            super.onSaveInstanceState(outState)
+        }
 
 }
